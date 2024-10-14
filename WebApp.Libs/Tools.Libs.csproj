@@ -145,6 +145,7 @@
     <Content Include="bin\Release\zxing.presentation.dll" />
     <Content Include="bin\Release\zxing.presentation.xml" />
     <Content Include="bin\Release\zxing.xml" />
+    <Content Include="SpreadsheetLight.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

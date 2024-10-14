@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "GetList";
-    var data = ViewBag.KetCaus as List<ToolsApp.Models.RecycleBinModels>;
+    var data = ViewBag.RecycleBins as List<ToolsApp.Models.RecycleBinModels>;
 }
 <table id="myTable" class="table table-bordered table-striped">
     <thead>
@@ -12,6 +12,8 @@
             <th>Table - id</th>
             <th>Nguời tạo</th>
             <th>Ngày tạo</th>
+            <th>Nguời cập nhật</th>
+            <th>Ngày cập nhật</th>
             <th>Tình trạng</th>
         </tr>
     </thead>
@@ -26,6 +28,9 @@
                     <td>
                         <a onclick="Delete('@item.Id')" class="btn btn-danger btn-custom">
                             <i class="far fa-trash-alt"></i> Xóa
+                        </a>
+                        <a onclick="RollBack('@item.Id')" class="btn btn-primary btn-custom">
+                            <i class="far fa-trash-alt"></i> Khôi phục
                         </a>
                     </td>
                     <td>@item.NameRecycle</td>

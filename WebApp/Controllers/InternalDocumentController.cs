@@ -131,7 +131,7 @@ namespace ToolsApp.Controllers
 
                 ViewBag.filteredShippingAddress = result;
             }
-            var _Documents = await db_.Documents.AsNoTracking().Where(a => a.isDelete == false && (User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin").OrderByDescending(a => a.DatetimeCreate).ToListAsync();
+            var _Documents = await db_.Documents.AsNoTracking().Where(a => a.isDelete == false && ((User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin")).OrderByDescending(a => a.DatetimeCreate).ToListAsync();
             ViewBag._Documents = _Documents;
             ViewBag.data = data;
             return PartialView();
@@ -221,7 +221,7 @@ namespace ToolsApp.Controllers
                                           }).ToListAsync();
             var _DocumentsData = await db_.Documents.AsNoTracking()
                             .Where(a => a.isDelete == false 
-                            && (User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin")
+                            && ((User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin"))
                             
                             .OrderByDescending(a => a.DatetimeCreate).ToListAsync();
             var tmp = RecipientAddress.Select(z => z.Description).ToList();

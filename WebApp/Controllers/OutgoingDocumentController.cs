@@ -140,7 +140,7 @@ namespace ToolsApp.Controllers
 
                 ViewBag.filteredShippingAddress = result;
             }
-            var _Documents = await db_.Documents.AsNoTracking().Where(a => a.isDelete == false && (User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin").OrderByDescending(a => a.DatetimeCreate).ToListAsync();
+            var _Documents = await db_.Documents.AsNoTracking().Where(a => a.isDelete == false && ((User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin")).OrderByDescending(a => a.DatetimeCreate).ToListAsync();
             ViewBag._Documents = _Documents;
             ViewBag.data = data;
             return PartialView();
@@ -219,7 +219,7 @@ namespace ToolsApp.Controllers
         }
         public async Task<ActionResult> Insert()
         {
-            var _Documents = await db_.Documents.AsNoTracking().Where(a => a.isDelete == false && (User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin").OrderByDescending(a => a.DatetimeCreate).ToListAsync();
+            var _Documents = await db_.Documents.AsNoTracking().Where(a => a.isDelete == false && ((User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin")).OrderByDescending(a => a.DatetimeCreate).ToListAsync();
             var _Departments = db_.Departments.AsNoTracking();
             var _Configs = db_.Configs.AsNoTracking();
             var RecipientAddress = await (from a in _Departments

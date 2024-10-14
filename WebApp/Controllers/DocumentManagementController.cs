@@ -135,7 +135,7 @@ namespace ToolsApp.Controllers
                     data.isDelete = true;
                     db_.Entry(data).State = EntityState.Modified;
                     db_.SaveChanges();
-                    _AppGlobal.AddRecycleBin(data.Id, "Xóa data chương trình Quản lý Tài liệu", "", "Departments", User.UserId);
+                    _AppGlobal.AddRecycleBin(data.Id, "Xóa data chương trình Quản lý Tài liệu", "", "Document", User.UserId);
                     return Json(new { status = 1, title = "", text = "Xóa thành công", obj = "" }, JsonRequestBehavior.AllowGet);
                 }
                 else

@@ -81,7 +81,7 @@
 @section scripts{
     <script>
         $("#DatetimeCreateStartSearch").datepicker({
-            format: 'dd/mm/yyyy',
+            format: 'dd/MM/yyyy',
             changeYear: true,
             changeMonth: true,
             onClose: function (selectedDate) {
@@ -89,7 +89,7 @@
             }
         });
         $("#DatetimeCreateEndSearch").datepicker({
-            format: 'dd/mm/yyyy',
+            format: 'dd/MM/yyyy',
             changeYear: true,
             changeMonth: true,
             onClose: function (selectedDate) {
@@ -104,12 +104,17 @@
           var paramsLoadData = [
             true,
             '@Url.Action("GetList")',
-              '#NameRecycleSearch', '#DatetimeCreateStartSearch', '#DatetimeCreateStartSearch',
+              '#NameRecycleSearch', '#DatetimeCreateStartSearch', '#DatetimeCreateEndSearch',
         ];
 
         function Delete(id_) {
             if (confirm('Bạn có chắc chắn muốn xóa?')) {
                 Action('@Url.Action("_DeleteFun")', 'POST', { Id: id_ }, paramsLoadData)
+            }
+        }
+        function RollBack(id_) {
+            if (confirm('Bạn có chắc chắn muốn khôi phục dữ liệu này?')) {
+                Action('@Url.Action("_RollBack")', 'POST', { Id: id_ }, paramsLoadData)
             }
         }
         $(document).ready(function () {

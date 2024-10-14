@@ -144,7 +144,7 @@ namespace ToolsApp.Controllers
                                                      Name = a.NameDepartment + " - " + b.NameConfig,
                                                      Description = a.DescriptionDepartment
                                                  }).ToListAsync();
-                var _DocumentsList = await _Documents.Where(a => a.isDelete == false && (User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin").ToListAsync();
+                var _DocumentsList = await _Documents.Where(a => a.isDelete == false && ((User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin")).ToListAsync();
 
                 var _Document = _DocumentsList
                                 .Select(a => new DoccumentComboboxModels
@@ -262,7 +262,7 @@ namespace ToolsApp.Controllers
                                               Name = a.NameDepartment + " - " + b.NameConfig,
                                               Description = a.DescriptionDepartment
                                           }).ToListAsync();
-            var _DocumentsList = await _Documents.Where(a => a.isDelete == false && (User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin").ToListAsync();
+            var _DocumentsList = await _Documents.Where(a => a.isDelete == false && ((User.Role == "User" && a.UserCreate == User.UserId) || User.Role == "Admin")).ToListAsync();
 
             var _Document = _DocumentsList
                             .Select(a => new DoccumentComboboxModels

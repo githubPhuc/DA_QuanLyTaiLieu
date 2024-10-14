@@ -1,0 +1,78 @@
+﻿@{
+    ViewBag.Title = "Insert";
+}
+<div class="form-group">
+    <label>Loại tài liệu</label>
+    <div class="input-group mb-3">
+        <div class="custom-file">
+            <input type="file" class="custom-file-input" id="inputGroupFile01" aria-describedby="inputGroupFileAddon01" multiple onchange="displayFileNames()">
+            <label class="custom-file-label" for="inputGroupFile01">Chọn file</label>
+        </div>
+    </div>    
+</div>
+<div id="file-names" class="mt-2"></div>
+
+<script>
+    function displayFileNames() {
+        const input = document.getElementById('inputGroupFile01');
+        const label = document.querySelector('.custom-file-label');
+        const fileNamesDiv = document.getElementById('file-names');
+        const fileNames = Array.from(input.files).map(file => file.name).join(', ');
+        label.textContent = fileNames.length > 0 ? fileNames : 'Chọn file'; 
+
+        fileNamesDiv.innerHTML = '';
+        Array.from(input.files).forEach(file => {
+            const fileExtension = file.name.split('.').pop().toLowerCase();
+            let icon;
+            switch (fileExtension) {
+                case 'pdf':
+                    icon = 'fas fa-file-pdf'; // Biểu tượng PDF
+                    break;
+                case 'doc':
+                case 'docx':
+                    icon = 'fas fa-file-word'; // Biểu tượng Word
+                    break;
+                case 'xls':
+                case 'xlsx':
+                    icon = 'fas fa-file-excel'; // Biểu tượng Excel
+                    break;
+                case 'ppt':
+                case 'pptx':
+                    icon = 'fas fa-file-powerpoint'; // Biểu tượng PowerPoint
+                    break;
+                case 'txt':
+                    icon = 'fas fa-file-alt'; // Biểu tượng Text
+                    break;
+                case 'zip':
+                    icon = 'fas fa-file-archive'; // Biểu tượng Zip
+                    break;
+                case 'jpg':
+                case 'jpeg':
+                    icon = 'fas fa-file-image'; // Biểu tượng hình ảnh
+                    break;
+                case 'png':
+                    icon = 'fas fa-file-image'; // Biểu tượng hình ảnh
+                    break;
+                default:
+                    icon = 'fas fa-file'; // Biểu tượng tệp mặc định
+                    break;
+            }
+
+            // Tạo phần tử hiển thị biểu tượng cho mỗi tệp
+            const fileRow = document.createElement('div');
+            fileRow.innerHTML = `<i class="${icon}"></i> ${file.name}`;
+            fileNamesDiv.appendChild(fileRow);
+        });
+    }
+</script>
+
+<style>
+    #file-names div {
+        margin-top: 5px;
+    }
+    .custom-file-label {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+</style>

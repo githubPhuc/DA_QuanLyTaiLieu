@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="6ec608768d02450da3045ff801bca8ca" Name="Diagram1">
+        <EntityTypeShape EntityType="QuanLiVanBanModel.Config" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.File" Width="1.5" PointX="10.5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.Folder" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.Menu" Width="1.5" PointX="15" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.Page" Width="1.5" PointX="12.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.RecycleBin" Width="1.5" PointX="7.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.User_Page" Width="1.5" PointX="18" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.User" Width="1.5" PointX="15.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Configs_Configs" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Files_Folders" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Folders_Folders" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Menu_Menu_MenuId" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Menu_Page_PageId" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_User_Page_Page_PageId" ManuallyRouted="false" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_User_Page_AspNetUsers_userId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.Delivery" Width="1.5" PointX="7.5" PointY="8.375" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.Department" Width="1.5" PointX="5.25" PointY="3.5" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Departments_Configs" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Deliverys_Departments" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Deliverys_Departments1" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.Category" Width="1.5" PointX="0.75" PointY="10.875" />
+        <EntityTypeShape EntityType="QuanLiVanBanModel.Document" Width="1.5" PointX="5.25" PointY="9.375" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Deliverys_Categories" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Folders_Categories" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Deliverys_Documents" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Documents_Folders" />
+        <AssociationConnector Association="QuanLiVanBanModel.FK_Files_Documents" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

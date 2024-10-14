@@ -1,0 +1,43 @@
+﻿
+@{
+    ViewBag.Title = "update";
+    var _Documents = ViewBag._Documents as List<ToolsApp.Models.DoccumentComboboxModels>;
+    var filteredShippingAddress = ViewBag.filteredShippingAddress as List<ToolsApp.Models.ConfigModel>;
+    var data = ViewBag.data as ToolsApp.EntityFramework.Delivery;
+}
+<input id="id" name="id" value="@data.Id" style="display:none" />
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">@*  *@
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Văn bản & Tài liệu</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <select class=" form-control chosen-select" id="IdDocuments" name="IdDocuments" aria-label=".form-select-md">
+                    @foreach (var item in _Documents)
+                    {
+                        <option value="@item.Id"@(item.Id == data.IdDocument ? "selected=\"selected\"" : "")>@item.Title - @item.NameDepartment</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Nơi nhận</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <select class=" form-control chosen-select" id="IdRecipientAddress" name="IdRecipientAddress" aria-label=".form-select-md">
+                    <option value="" >--select--</option>
+                    @foreach (var item in filteredShippingAddress)
+                    {
+                        <option value="@item.Id" @(item.Id == data.RecipientAddressId && data.RecipientAddressId!= null ? "selected=\"selected\"" : "")>@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+

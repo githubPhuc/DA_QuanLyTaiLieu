@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "insert";
+    var _Documents = ViewBag._Documents as List<ToolsApp.Models.DoccumentComboboxModels>;
+    var RecipientAddress = ViewBag.RecipientAddress as List<ToolsApp.Models.ConfigModel>;
+}
+<input id="id" name="id" value="0" style="display:none" />
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Văn bản & Tài liệu</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <select class=" form-control chosen-select" id="IdDocuments" name="IdDocuments" aria-label=".form-select-md">
+                    @foreach (var item in _Documents)
+                    {
+                        <option value="@item.Id">@item.Title - @item.NameDepartment</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Nơi nhận</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <select class=" form-control chosen-select" id="IdRecipientAddress" name="IdRecipientAddress" aria-label=".form-select-md">
+                    @foreach (var item in RecipientAddress)
+                    {
+                        <option value="@item.Id">@item.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

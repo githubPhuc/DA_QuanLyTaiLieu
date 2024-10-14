@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Xem file";
+    var data = ViewBag.dataFile as List<ToolsApp.EntityFramework.File>;
+}
+
+<input id="id" name="id" value="@ViewBag.Id" style="display:none" />
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Tên File</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <select class="form-control chosen-select" onchange="viewFile()" id="UrlFile" name="UrlFile" aria-label=".form-select-md">
+                        <option value="">-- select --</option>
+                    @foreach (var item in data)
+                    {
+                        <option value="@item.UrlFile">@item.FileName</option>
+                    }
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+

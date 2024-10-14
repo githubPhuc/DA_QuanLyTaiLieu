@@ -1,0 +1,130 @@
+﻿
+@{
+    ViewBag.Title = "Insert";
+}
+<input id="id" name="id" value="0" style="display:none" />
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Tên phòng ban</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <input value="" class="form-control" type="text" id="NameDepartment" name="NameDepartment" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Mã phòng ban</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <input value="" class="form-control" type="text" id="DescriptionDepartment" name="DescriptionDepartment" oninput="removeDiacritics(this);" />
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Địa chỉ</label>
+            <div class="col-md-8 col-sm-8 ten">
+                <input value="" data-id="" class="form-control quickEdit" type="text" id="Address" name="Address" onblur="ActionAddress()">
+            </div>
+            <div class="col-md-4 col-sm-4">
+                <select class=" form-control chosen-select" id="khuVucTimKiem" name="khuVucTimKiem" aria-label=".form-select-md">
+                    <option value="hcm">Khu vực - TP Hồ Chí Minh</option>
+                    <option value="">Khu vực - Khác</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Địa chỉ đầy đủ</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <select class="form-control chosen-select" data-id="" style="width: 100%" id="AddressDepartment" name="AddressDepartment" aria-label=".form-select-md">
+                    <option value="">--select--</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Icon</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <select class="form-control chosen-select" data-id="" style="width: 100%" id="Icon" name="Icon" aria-label=".form-select-md">
+                    <option value="">--select--</option>
+                    <option value="fa fa-camera">Camera</option>
+                    <option value="fa fa-heart">Heart</option>
+                    <option value="fa fa-star">Star</option>
+                    <option value="fa fa-music">Music</option>
+                    <option value="fa fa-home">Home</option>
+                    <option value="fa fa-user">User</option>
+
+                </select>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function removeDiacritics(input) {
+        const diacriticsMap = {
+            'à': 'a', 'ả': 'a', 'ã': 'a', 'á': 'a', 'ạ': 'a', 'â': 'a', 'ầ': 'a', 'ẩ': 'a', 'ẫ': 'a', 'ậ': 'a',
+            'ă': 'a', 'ằ': 'a', 'ẳ': 'a', 'ẵ': 'a', 'ặ': 'a',
+            'è': 'e', 'ẹ': 'e', 'ẻ': 'e', 'ẽ': 'e', 'é': 'e', 'ê': 'e', 'ề': 'e', 'ể': 'e', 'ễ': 'e', 'ệ': 'e',
+            'ì': 'i', 'ị': 'i', 'ỉ': 'i', 'ĩ': 'i', 'í': 'i',
+            'ò': 'o', 'ỏ': 'o', 'õ': 'o', 'ó': 'o', 'ọ': 'o', 'ô': 'o', 'ồ': 'o', 'ổ': 'o', 'ỗ': 'o', 'ộ': 'o',
+            'ơ': 'o', 'ờ': 'o', 'ở': 'o', 'ỡ': 'o', 'ợ': 'o',
+            'ù': 'u', 'ụ': 'u', 'ủ': 'u', 'ũ': 'u', 'ú': 'u', 'ư': 'u', 'ừ': 'u', 'ử': 'u', 'ữ': 'u', 'ự': 'u',
+            'ỳ': 'y', 'ỵ': 'y', 'ỷ': 'y', 'ỹ': 'y', 'ý': 'y',
+            'đ': 'd'
+        };
+        let value = input.value;
+        for (let key in diacriticsMap) {
+            value = value.replace(new RegExp(key, 'g'), diacriticsMap[key]);
+        }
+        input.value = value.toUpperCase();
+    }
+    $("select").each(function () {
+        $(this).select2();
+    });
+    $('#khuVucTimKiem').on('change', function () {
+        var khuVucTimKiem = $(this).val();
+        var Address = $('#Address').val();
+        var address = `${Address}, ${khuVucTimKiem}`;
+        if (address) {
+            geocodeAddress(address);
+        }
+    });
+    function ActionAddress() {
+        var Address = $("#Address").val();
+        var khuVucTimKiem = $("#khuVucTimKiem").val();
+        var address = `${Address}, ${khuVucTimKiem}`;
+        if (address) {
+            geocodeAddress(address);
+        }
+    }
+    function geocodeAddress(address) {
+        var url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}&accept-language=vi`;
+        $.getJSON(url, function (data) {
+            if (data.length > 0) {
+                var $AddressDepartment = $("#AddressDepartment");
+                $AddressDepartment.empty();
+                $AddressDepartment.append(new Option("", "--select--"));
+                data.forEach(function (result) {
+                    var displayName = result.display_name;
+                    $AddressDepartment.append(new Option(displayName, displayName));
+                });
+                $AddressDepartment.trigger('change');
+            } else {
+                alert('Không tìm thấy địa chỉ');
+            }
+        });
+    }
+
+</script>

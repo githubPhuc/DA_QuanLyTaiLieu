@@ -1,0 +1,18 @@
+﻿@{ 
+    var data = ViewBag._Folders as List<ToolsApp.EntityFramework.sp_LoadNameFodelChild_Result>;
+}
+<div class="form-group">
+    <label>Chọn vị trí lưu</label>
+    <select class="form-control form-control-md chosen-select" id="LastChildID" name="LastChildID" aria-label=".form-select-md">
+        @foreach(var item in data)
+            {
+                <option value="@item.LastChildID">@item.Hierarchy</option>
+
+            }
+    </select>
+</div>
+<script>
+    $("select").each(function () {
+        $(this).select2()
+    })
+</script>

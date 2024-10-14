@@ -4,11 +4,11 @@
 }
 
 .form-container {
-    background: linear-gradient(#E9374C, #D31128);
+    background: linear-gradient(#377be9, #19d997);
     font-family: 'Roboto', sans-serif;
     font-size: 0;
     padding: 0 15px;
-    border: 1px solid #DC2036;
+    border: 1px solid #dcbd20;
     border-radius: 15px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
 }

@@ -248,7 +248,7 @@ namespace ToolsApp.Controllers
                                             {
                                                 ParentId = model.FolderId,
                                                 DoccumentId = dataDoc.Id,
-                                                FileName = fileName,
+                                                FileName = file.FileName,
                                                 FileExtension = fileExtension,
                                                 UrlFile = relativePath,
                                                 Status = true,

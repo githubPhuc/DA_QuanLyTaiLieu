@@ -1091,6 +1091,7 @@
     <Content Include="Content\Home\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\Home\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="Content\Home\themes\office\new.css" />
+    <Content Include="Content\images\11zon_cropped.png" />
     <Content Include="Content\images\ajax-load.gif" />
     <Content Include="Content\images\backImage.png" />
     <Content Include="Content\images\bg.jpg" />
@@ -1098,15 +1099,7 @@
     <Content Include="Content\images\circle2.png" />
     <Content Include="Content\images\closeIcon.png" />
     <Content Include="Content\images\l-circle.png" />
-    <Content Include="Content\images\logo-BINH PHUONG-1.png" />
-    <Content Include="Content\images\logo-BINH PHUONG-2.png" />
-    <Content Include="Content\images\logo-BINH PHUONG.png" />
-    <Content Include="Content\images\logo-blue.png" />
-    <Content Include="Content\images\logo-white.png" />
     <Content Include="Content\images\logo.png" />
-    <Content Include="Content\images\logo_dksh.gif" />
-    <Content Include="Content\images\logo_to.png" />
-    <Content Include="Content\images\logo_tt1.png" />
     <Content Include="Content\images\noImage.png" />
     <Content Include="Content\images\S-Office.png" />
     <Content Include="Content\images\sticker-facebook.gif" />

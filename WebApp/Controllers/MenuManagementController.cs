@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DocumentFormat.OpenXml.Drawing.Charts;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace ToolsApp.Areas.Admin.Controllers
     public class MenuManagementController : BaseController
     {
         QuanLiVanBanEntities db_ = new QuanLiVanBanEntities();
+        AppGlobal _AppGlobal = new AppGlobal();
         // GET: UserManagement
         public ActionResult Index()
         {
@@ -104,7 +106,6 @@ namespace ToolsApp.Areas.Admin.Controllers
                     item.OrderNo = model.OrderNo;
                     item.DatetimeUpdate = DateTime.Now;
                     item.UserUpdate = User.UserId;
-
                     #region Xử lý parent
                     item.ParentId = (model.ParentId == 0 ? null : model.ParentId);
                     item.PageId = (model.PageId == 0 ? null : model.PageId);
@@ -130,11 +131,16 @@ namespace ToolsApp.Areas.Admin.Controllers
             try
             {
                 var item = db_.Menus.FirstOrDefault(p => p.Id == Id);
-                item.isDelete = true;
-                item.DatetimeDelete = DateTime.Now;
-                item.UserDelete = User.UserId;
-                db_.Entry(item).State = EntityState.Modified;
-                db_.SaveChanges();
+                if (item != null)
+                {
+                    item.isDelete = true;
+                    item.DatetimeDelete = DateTime.Now;
+                    item.UserDelete = User.UserId;
+
+                    db_.Entry(item).State = EntityState.Modified;
+                    db_.SaveChanges();
+                    _AppGlobal.AddRecycleBin(item.Id, "Xóa data chương trình quản lý menu", "", "Menu", User.UserId);
+                }
                 return Json(new { status = 1, title = "", text = "Xóa thành công.", obj = "" }, JsonRequestBehavior.AllowGet);
             }
             catch (Exception ex)

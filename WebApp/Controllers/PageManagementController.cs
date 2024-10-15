@@ -89,7 +89,6 @@ namespace ToolsApp.Areas.Admin.Controllers
                     item.Action = model.Action;
                     item.DatetimeUpdate = DateTime.Now;
                     item.UserUpdate = User.UserName;
-
                     db_.Entry(item).State = EntityState.Modified;
                     db_.SaveChanges();
                     return Json(new { status = 1, title = "", text = "Updated.", obj = "" }, JsonRequestBehavior.AllowGet);
@@ -111,14 +110,22 @@ namespace ToolsApp.Areas.Admin.Controllers
             try
             {
                 var item = db_.Pages.FirstOrDefault(p => p.Id == Id);
-                item.isDelete = true;
-                item.DatetimeUpdate = DateTime.Now;
-                item.UserUpdate = User.UserName;
-                db_.Entry(item).State = EntityState.Modified;
-                db_.SaveChanges();
-                AppGlobal appGlobal = new AppGlobal();
-                appGlobal.AddRecycleBin(item.Id, "Xóa data chương trình quản lý trang tác vụ", "", "Pages", User.UserId);
-                return Json(new { status = 1, title = "", text = "Deleted.", obj = "" }, JsonRequestBehavior.AllowGet);
+                if(item != null)
+                {
+                    item.isDelete = true;
+                    item.DatetimeUpdate = DateTime.Now;
+                    item.UserUpdate = User.UserName;
+                    db_.Entry(item).State = EntityState.Modified;
+                    db_.SaveChanges();
+                    AppGlobal appGlobal = new AppGlobal();
+                    appGlobal.AddRecycleBin(item.Id, "Xóa data chương trình quản lý trang tác vụ", "", "Page", User.UserId);
+                    return Json(new { status = 1, title = "", text = "Xóa thành công.", obj = "" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { status = -1, title = "", text = "Không tìm thấy data", obj = "" }, JsonRequestBehavior.AllowGet);
+
+                }
             }
             catch (Exception ex)
             {

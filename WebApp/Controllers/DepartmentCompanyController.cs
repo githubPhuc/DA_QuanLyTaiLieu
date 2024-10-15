@@ -17,6 +17,7 @@ namespace ToolsApp.Controllers
     {
         // GET: CartManagerment
         QuanLiVanBanEntities db_ = new QuanLiVanBanEntities();
+        AppGlobal _AppGlobal = new AppGlobal();
         const int ParentCompany = 9;
         public ActionResult Index()
         {
@@ -94,8 +95,7 @@ namespace ToolsApp.Controllers
         }
         [ValidateInput(false)]
         [HttpPost]
-        public JsonResult _InsertFun(string NameDepartment, string DescriptionDepartment = "", string Address = "", int IdConFig=0
-       , string AddressDepartment = "", string Icon = "")
+        public JsonResult _InsertFun(string NameDepartment,string Address = "", int IdConFig=0 , string AddressDepartment = "", string Icon = "")
         {
 
             try
@@ -110,15 +110,7 @@ namespace ToolsApp.Controllers
                     return Json(new { status = -1, title = "", text = "Vui lòng nhập tên phòng ban", obj = "" }, JsonRequestBehavior.AllowGet);
 
                 }
-                if (string.IsNullOrEmpty(DescriptionDepartment))
-                {
-                    return Json(new { status = -1, title = "", text = "Vui lòng nhập tên phòng ban", obj = "" }, JsonRequestBehavior.AllowGet);
-
-                }
-                else
-                {
-                    DescriptionDepartment = DescriptionDepartment.Replace("-", "");
-                }
+                string DescriptionDepartment = _AppGlobal.GenerateRandomString(5).ToUpper();                
                 var check = db_.Departments.Where(a => a.DescriptionDepartment == DescriptionDepartment).FirstOrDefault();
                 if (check != null)
                 {
@@ -166,7 +158,7 @@ namespace ToolsApp.Controllers
         }
         [ValidateInput(false)]
         [HttpPost]
-        public JsonResult _EditFun(int id,string NameCategory, string DescriptionDepartment = "",string Address = "",int IdConFig = 0
+        public JsonResult _EditFun(int id,string NameCategory, string Address = "",int IdConFig = 0
        , string AddressDepartment = "", string Icon = "")
         {
          
@@ -182,25 +174,11 @@ namespace ToolsApp.Controllers
                     return Json(new { status = -1, title = "", text = "Vui lòng nhập tên phòng ban", obj = "" }, JsonRequestBehavior.AllowGet);
 
                 }
-                if (string.IsNullOrEmpty(DescriptionDepartment))
-                {
-                    return Json(new { status = -1, title = "", text = "Vui lòng nhập tên phòng ban", obj = "" }, JsonRequestBehavior.AllowGet);
-
-                }
-                else
-                {
-                    DescriptionDepartment = DescriptionDepartment.Replace("-", "");
-                }
-                var check = db_.Departments.Where(a => a.DescriptionDepartment == DescriptionDepartment).FirstOrDefault();
-                if (check != null)
-                {
-                    return Json(new { status = -1, title = "", text = "Mã phòng ban này đã tồn tại", obj = "" }, JsonRequestBehavior.AllowGet);
-                }
+                
                 var data = db_.Departments.Find(id);
                 if(data != null)
                 {
                     data.NameDepartment = NameCategory;
-                    data.DescriptionDepartment = DescriptionDepartment;
                     data.AddressDepartment = Address + "-" + AddressDepartment;
                     data.Icon = "<i class=\"" + Icon + "\"></i>";
                     data.Status = true;
@@ -241,7 +219,7 @@ namespace ToolsApp.Controllers
                     db_.Entry(data).State = EntityState.Modified;
                     db_.SaveChanges();
                     AppGlobal appGlobal = new AppGlobal();
-                    appGlobal.AddRecycleBin(data.Id, "Xóa data chương trình Quản lý phòng ban", "", "Departments", User.UserId);
+                    appGlobal.AddRecycleBin(data.Id, "Xóa data chương trình Quản lý phòng ban", "", "Department", User.UserId);
                     return Json(new { status = 1, title = "", text = "Xóa thành công", obj = "" }, JsonRequestBehavior.AllowGet);
                 }
                 else

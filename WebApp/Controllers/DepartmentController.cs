@@ -16,6 +16,7 @@ namespace ToolsApp.Controllers
     {
         // GET: CartManagerment
         QuanLiVanBanEntities db_ = new QuanLiVanBanEntities();
+        AppGlobal _AppGlobal = new AppGlobal();
         public ActionResult Index()
         {
             return View();
@@ -78,7 +79,7 @@ namespace ToolsApp.Controllers
         }
         [ValidateInput(false)]
         [HttpPost]
-        public JsonResult _InsertFun(string NameDepartment, string DescriptionDepartment = "", string Address = ""
+        public JsonResult _InsertFun(string NameDepartment, string Address = ""
        , string AddressDepartment = "", string Icon = "")
         {
 
@@ -89,15 +90,7 @@ namespace ToolsApp.Controllers
                     return Json(new { status = -1, title = "", text = "Vui lòng nhập tên phòng ban", obj = "" }, JsonRequestBehavior.AllowGet);
 
                 }
-                if (string.IsNullOrEmpty(DescriptionDepartment))
-                {
-                    return Json(new { status = -1, title = "", text = "Vui lòng nhập tên phòng ban", obj = "" }, JsonRequestBehavior.AllowGet);
-
-                }
-                else
-                {
-                    DescriptionDepartment = DescriptionDepartment.Replace("-", "");
-                }
+                string DescriptionDepartment =  _AppGlobal.GenerateRandomString(5).ToUpper();
                 var check = db_.Departments.Where(a => a.DescriptionDepartment == DescriptionDepartment).FirstOrDefault();
                 if (check != null)
                 {
@@ -144,14 +137,14 @@ namespace ToolsApp.Controllers
         }
         [ValidateInput(false)]
         [HttpPost]
-        public JsonResult _EditFun(int id,string NameCategory, string DescriptionCategory = "",string Address = ""
+        public JsonResult _EditFun(int id,string NameDepartment,string Address = ""
        , string AddressDepartment = "", string Icon = "")
         {
          
             try
             {
 
-                if (NameCategory == "" || NameCategory == null)
+                if (NameDepartment == "" || NameDepartment == null)
                 {
                     return Json(new { status = -1, title = "", text = "Vui lòng nhập tên phòng ban", obj = "" }, JsonRequestBehavior.AllowGet);
 
@@ -159,8 +152,7 @@ namespace ToolsApp.Controllers
                 var data = db_.Departments.Find(id);
                 if(data != null)
                 {
-                    data.NameDepartment = NameCategory;
-                    data.DescriptionDepartment = DescriptionCategory;
+                    data.NameDepartment = NameDepartment;
                     data.AddressDepartment = Address + "-" + AddressDepartment;
                     data.Icon = "<i class=\"" + Icon + "\"></i>";
                     data.Status = true;
@@ -201,7 +193,7 @@ namespace ToolsApp.Controllers
                     db_.Entry(data).State = EntityState.Modified;
                     db_.SaveChanges();
                     AppGlobal appGlobal = new AppGlobal();
-                    appGlobal.AddRecycleBin(data.Id, "Xóa data chương trình Quản lý phòng ban", "", "Departments", User.UserId);
+                    appGlobal.AddRecycleBin(data.Id, "Xóa data chương trình Quản lý phòng ban", "", "Department", User.UserId);
                     return Json(new { status = 1, title = "", text = "Xóa thành công", obj = "" }, JsonRequestBehavior.AllowGet);
                 }
                 else

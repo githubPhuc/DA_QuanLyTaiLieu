@@ -107,7 +107,6 @@ namespace ToolsApp.Controllers
                 if (NameCategory == "" || NameCategory == null)
                 {
                     return Json(new { status = -1, title = "", text = "Vui lòng nhập tên loại", obj = "" }, JsonRequestBehavior.AllowGet);
-
                 }
                 var data = db_.Categories.Find(id);
                 if(data != null)
@@ -143,6 +142,7 @@ namespace ToolsApp.Controllers
          
             try
             {
+
                 var data = db_.Categories.Find(id);
                 if(data != null)
                 {
@@ -151,6 +151,8 @@ namespace ToolsApp.Controllers
                     data.isDelete = true;
                     db_.Entry(data).State = EntityState.Modified;
                     db_.SaveChanges();
+                    AppGlobal appGlobal = new AppGlobal();
+                    appGlobal.AddRecycleBin(data.Id, "Xóa data chương trình quản lý ", "", "Category", User.UserId);
                     return Json(new { status = 1, title = "", text = "Xóa thành công", obj = "" }, JsonRequestBehavior.AllowGet);
                 }
                 else

@@ -1,0 +1,78 @@
+﻿
+
+
+@{
+    var data = ViewBag.model as ToolsApp.EntityFramework.User;
+    var Deparment = ViewBag.Department as List<ToolsApp.EntityFramework.Department>;
+}
+<input id="Id" name="Id" value="@data.Id" style="display:none" />
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Tên tài khoản</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <input disabled oninput="this.value = this.value.toUpperCase().trim()" value="@data.UserName" class="form-control" type="text" id="username" name="username" />
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Tên nhân viên</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <input value="@data.TenNV" class="form-control" type="text" id="fullName" name="fullName" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Email</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <input oninput="this.value = this.value.trim()" value="@data.Email" class="form-control" type="text" id="email" name="email" />
+            </div>
+        </div>
+
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Phone</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <input oninput="this.value = this.value().trim()" value="@data.SoDienThoai" class="form-control" type="text" id="SoDienThoai" name="SoDienThoai" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Quyền quản trị</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <select id="AccoutType" name="AccoutType" class="form-control chosen-select" style="width: 100%;">
+                    <option value="User">--User--</option>
+                    <option value="Admin">--Admin--</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Quyền quản trị</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <select id="Department" name="Department" class="form-control chosen-select" style="width: 100%;">
+                    @foreach (var item in Deparment)
+                    {
+                        <option value="@item.Id" @(data.PhongBan != null && data.PhongBan ==item.Id ? "selected=\"selected\"" : "")>@item.NameDepartment</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+
+    </div>
+    @*Ngay lam viec*@
+
+
+</div>
+<script type="text/javascript">
+    var config = {
+        '.chosen-select': {},
+        '.chosen-select-deselect': { allow_single_deselect: true },
+        '.chosen-select-no-single': { disable_search_threshold: 10 },
+        '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+        '.chosen-select-width': { width: "125%" },
+        'search_contains': true
+    }
+    for (var selector in config) {
+        $(selector).chosen(config);
+    }
+
+
+</script>

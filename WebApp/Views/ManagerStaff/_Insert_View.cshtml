@@ -1,0 +1,82 @@
+﻿
+
+@{
+    var Deparment = ViewBag.Department as List<ToolsApp.EntityFramework.Department>;
+}
+
+<div class="row" style="margin-bottom:5px">
+    <div class="col-md-12 col-sm-4">
+
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Tài khoản:</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <input value="" class="form-control" type="text" id="UserName" name="UserName" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Mật khẩu:</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <input value="" class="form-control" type="text" id="password" name="password" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Tên nhân viên</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <input value="" class="form-control" type="text" id="fullName" name="fullName" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Email</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <input oninput="this.value = this.value.trim()" value="" class="form-control" type="text" id="email" name="email" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Số điện thoại</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <input placeholder="Số điện thoại sẽ dùng làm tên tài khoản cho nhân viên" oninput="this.value = this.value.replace(/[^0-123456789]/g, '');" value="" class="form-control" type="text" id="SoDienThoai" name="SoDienThoai" />
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Quyền quản trị</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <select id="AccoutType" name="AccoutType" class="form-control chosen-select" style="width: 100%;">
+                    <option value="User">--User--</option>
+                    <option value="Admin">--Admin--</option>
+                </select>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:5px">
+            <label class="col-md-12 col-sm-12">Phòng ban</label>
+            <div class="col-md-12 col-sm-12 ten">
+                <select id="Department" name="Department" class="form-control chosen-select" style="width: 100%;">
+                    @foreach (var item in Deparment)
+                    {
+                        <option value="@item.Id">@item.NameDepartment</option>
+                    }
+                </select>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+<script type="text/javascript">
+
+    var config = {
+        '.chosen-select': {},
+        '.chosen-select-deselect': { allow_single_deselect: true },
+        '.chosen-select-no-single': { disable_search_threshold: 10 },
+        '.chosen-select-no-results': { no_results_text: 'Oops, nothing found!' },
+        '.chosen-select-width': { width: "125%" },
+        'search_contains': true
+    }
+    for (var selector in config) {
+        $(selector).chosen(config);
+    }
+
+
+
+
+</script>

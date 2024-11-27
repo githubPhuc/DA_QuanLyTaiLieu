@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="57e5b36d69404d359d5ca7630c1ee9b8" Name="Diagram1">
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.Category" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.Config" Width="1.5" PointX="3" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.Department" Width="1.5" PointX="5.25" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.File" Width="1.5" PointX="7.5" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.Folder" Width="1.5" PointX="3" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.Menu" Width="1.5" PointX="12" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.Page" Width="1.5" PointX="9.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.RecycleBin" Width="1.5" PointX="9.75" PointY="9.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.User_Page" Width="1.5" PointX="15" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.User" Width="1.5" PointX="12.75" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Folders_Categories" ManuallyRouted="false" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Configs_Configs" ManuallyRouted="false" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Departments_Configs" ManuallyRouted="false" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Files_Folders" ManuallyRouted="false" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Folders_Folders" ManuallyRouted="false" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Menu_Menu_MenuId" ManuallyRouted="false" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Menu_Page_PageId" ManuallyRouted="false" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_User_Page_Page_PageId" ManuallyRouted="false" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_User_Page_AspNetUsers_userId" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.Delivery" Width="1.5" PointX="7.875" PointY="6.625" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Deliverys_Categories" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Deliverys_Departments" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Deliverys_Departments1" />
+        <EntityTypeShape EntityType="HuynhPhanThuDongModel.Document" Width="1.5" PointX="5.25" PointY="10" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Deliverys_Documents" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Documents_Folders" />
+        <AssociationConnector Association="HuynhPhanThuDongModel.FK_Files_Documents" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

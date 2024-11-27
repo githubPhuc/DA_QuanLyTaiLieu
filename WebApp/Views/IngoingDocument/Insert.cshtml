@@ -1,0 +1,257 @@
+﻿@{
+    ViewBag.Title = "Insert";
+    var dataDepartments = ViewBag.dataDepartments as List<ToolsApp.Models.ConfigModel>;
+    var RecipientAddress = ViewBag.RecipientAddress as List<ToolsApp.Models.ConfigModel>;
+}
+
+<div class="container-fluid" style=" padding:10px;">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card card-primary card-outline">
+                <div class="card-body pad">
+                    <form id="insertDocumentForm" enctype="multipart/form-data">
+
+                        <div class="row">
+                            <div class="col-md-8">
+                                <button id="btnSaveAddData" onclick="InsertDoccument();" type="button" class="btn bg-gradient-success"><i class="fa fa-plus"></i>&nbsp;Thêm mới tài liệu</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tiêu đề</label>
+                                    <input class="form-control form-control-md" type="text" autocomplete="off" id="TitleDocument" name="TitleDocument" />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group">
+                                    <label>Ngày phát hành</label>
+                                    <input value="@DateTime.Now.ToString("dd/MM/yyyy")"
+                                           class="form-control" type="text" autocomplete="off"
+                                           id="DatePublish" name="DatePublish" />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Nơi soạn thảo</label>
+                                    <select class=" form-control chosen-select" id="IdDepartment" name="IdDepartment" aria-label=".form-select-md">
+                                        @foreach (var item in dataDepartments)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Nơi nhận văn bản</label>
+                                    <select class=" form-control chosen-select" onchange="_LoadUserCBX();" id="IdRecipientAddress" name="IdRecipientAddress" aria-label=".form-select-md">
+                                        <option value="0">--select--</option>
+                                        @foreach (var item in RecipientAddress)
+                                        {
+                                            <option value="@item.Id">@item.Name</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Trích yếu</label>
+                                    <textarea id="AbstractDocument"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="view-insert-file mt-4 table-responsive"></div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="view-folders-file mt-4 table-responsive"></div>
+
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-md-12">
+                                <label>Phân quyền người dùng được xem</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Phòng ban</label>
+                                <select id="AuthenDepartment" name="AuthenDepartment" multiple="multiple" class="form-control chosen-select" style="width: 100%;">
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label>Nhân viên</label>
+                                <select id="Staff" name="Staff" multiple="multiple" class="form-control chosen-select" style="width: 100%;">
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/tinymce/tinymce.min.js"></script>
+    <script>
+        tinymce.init({
+            selector: 'textarea#AbstractDocument'
+        });
+    </script>
+    <script>
+        $("#DatePublish").datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            changeMonth: true,
+            onClose: function (selectedDate) {
+                //$("#FromDate").datepicker("option", "minDate", selectedDate);
+            }
+        });
+
+        $(document).ready(function () {
+            loadviewfile();
+            loadviewfodel();
+            loadDepartment();
+            _LoadUserCBX();
+        });
+        function loadDepartment()
+        {
+            try {
+                $.ajax({
+                    url: '@Url.Action("GetList_CBX", "Department")',
+                    timeout: 2000000,
+                    data: {
+                    },
+                    success: function (response) {
+                        $('#AuthenDepartment').empty();
+                        var option = $('<option></option>').attr('value', "-99").text("--select--");
+                        $('#AuthenDepartment').append(option);
+                        $.each(response.obj, function (index, item) {
+                            var option = $('<option></option>').attr('value', item.Id).text(item.NameDepartment);
+                            $('#AuthenDepartment').append(option);
+                        });
+                    },
+                    error: function (message) {
+                        $(".divLoading").removeClass("loading");
+                    }
+                });
+            } catch (e) {
+            }
+        }
+        function _LoadUserCBX()
+        {
+            try {
+                $.ajax({
+                    url: '@Url.Action("_LoadUserCBX", "UserManagement")',
+                    timeout: 2000000,
+                    data: {
+
+                    },
+                    success: function (response) {
+                        $('#Staff').empty();
+                        var option = $('<option></option>').attr('value', -99).text("--All Staff--");
+                        $('#Staff').append(option);
+                        $.each(response.obj, function (index, item) {
+                            var option = $('<option></option>').attr('value', item.id).text(item.fullname);
+                            $('#Staff').append(option);
+                        });
+                    },
+                    error: function (message) {
+                        $(".divLoading").removeClass("loading");
+                    }
+                });
+            } catch (e) {
+            }
+        }
+        function loadviewfile()
+        {
+             try {
+                 $.ajax({
+                     url: '@Url.Action("Insert_File")',
+                     timeout: 2000000,
+                     data: {
+                     },
+                     success: function (response) {
+                         $('.view-insert-file').html(response);
+                     },
+                     error: function (message) {
+                         $(".divLoading").removeClass("loading");
+                     }
+                 });
+             } catch (e) {
+             }
+        }
+        function loadviewfodel()
+        {
+             try {
+                 $.ajax({
+                     url: '@Url.Action("View_Fodels")',
+                     timeout: 2000000,
+                     data: {
+                     },
+                     success: function (response) {
+                         $('.view-folders-file').html(response);
+                     },
+                     error: function (message) {
+                         $(".divLoading").removeClass("loading");
+                     }
+                 });
+             } catch (e) {
+             }
+        }
+        function InsertDoccument() {
+            var files = document.getElementById("inputGroupFile01").files;
+            var _TitleDocument = $('#TitleDocument').val();
+            var _DatePublish = $('#DatePublish').val();
+            var _IdDepartment = $('#IdDepartment').val();
+            var _AbstractDocument = tinymce.get('AbstractDocument').getContent();
+            var _IdRecipientAddress = $('#IdRecipientAddress').val();
+            var _LastChildID = $('#LastChildID').val();
+            var _AuthenticateDepartment = $('#AuthenDepartment').val();
+            var _AuthenticateStaff = $('#Staff').val();
+            if (files.length > 0) {
+                var formData = new FormData();
+                for (var i = 0; i < files.length; i++) {
+                    formData.append('files', files[i]);
+                }
+                formData.append('IdDepartment', _IdDepartment);
+                formData.append('RecipientAddressId', _IdRecipientAddress);
+                formData.append('TitleDocument', _TitleDocument);
+                formData.append('AbstractDocument', _AbstractDocument);
+                formData.append('DatePublish', _DatePublish);
+                formData.append('FolderId', _LastChildID);
+                formData.append('AuthenticateDepartment', _AuthenticateDepartment);
+                formData.append('AuthenticateStaff', _AuthenticateStaff);
+                $.ajax({
+                    url: "@Url.Action("_InsertFun")",
+                    type: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                }).done((result) => {
+                    if (result.status == 1) {
+                        notify("Thêm document thành công", "success");
+                        setTimeout(() => {
+                            window.location = "@Url.Action("Index", "IngoingDocument")";
+                        }, 2000);
+                    }
+                    else {
+                        notify(result.text, "error")
+                    }
+                }).error((result) => {
+                    notify(result.text, "error")
+                    console.log(result);
+                });
+            }
+        }
+
+    </script>
+}

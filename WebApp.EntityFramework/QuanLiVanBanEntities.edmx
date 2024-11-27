@@ -1,0 +1,1424 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="HuynhPhanThuDongModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameCategory" Type="nvarchar" MaxLength="100" />
+          <Property Name="DescriptionCategory" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="UserCreate" Type="int" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserUpdate" Type="int" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="UserDelete" Type="int" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Configs">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="NameConfig" Type="nvarchar" MaxLength="100" />
+          <Property Name="DescriptionConfig" Type="nvarchar" MaxLength="100" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="UserCreate" Type="int" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserUpdate" Type="int" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="UserDelete" Type="int" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Deliverys">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdDocument" Type="int" />
+          <Property Name="ShippingAddressId" Type="int" />
+          <Property Name="RecipientAddressId" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="UserCreate" Type="int" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserUpdate" Type="int" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="UserDelete" Type="int" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+          <Property Name="GuiId" Type="nvarchar" MaxLength="4000" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="UserAuthorization" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Departments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentConFig" Type="int" />
+          <Property Name="NameDepartment" Type="nvarchar(max)" />
+          <Property Name="DescriptionDepartment" Type="nvarchar" MaxLength="100" />
+          <Property Name="AddressDepartment" Type="nvarchar(max)" />
+          <Property Name="Icon" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="UserCreate" Type="int" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserUpdate" Type="int" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="UserDelete" Type="int" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Documents">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeDocument" Type="nvarchar" MaxLength="50" />
+          <Property Name="TitleDocument" Type="nvarchar(max)" />
+          <Property Name="AbstractDocument" Type="nvarchar(max)" />
+          <Property Name="DatePublish" Type="datetime2" Precision="7" />
+          <Property Name="UrlFile" Type="nvarchar(max)" />
+          <Property Name="FolderId" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="UserCreate" Type="int" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserUpdate" Type="int" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="UserDelete" Type="int" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+          <Property Name="FileExtension" Type="nvarchar" MaxLength="10" />
+          <Property Name="IsDoc" Type="bit" />
+        </EntityType>
+        <EntityType Name="Files">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="DoccumentId" Type="int" />
+          <Property Name="FileName" Type="nvarchar" MaxLength="50" />
+          <Property Name="UrlFile" Type="nvarchar(max)" />
+          <Property Name="FileExtension" Type="nvarchar" MaxLength="10" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="UserCreate" Type="int" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserUpdate" Type="int" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="UserDelete" Type="int" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Folders">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="CategoryDocumentId" Type="int" />
+          <Property Name="NameFolder" Type="nvarchar" MaxLength="100" />
+          <Property Name="IconFolder" Type="nvarchar(max)" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="UserCreate" Type="int" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserUpdate" Type="int" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="UserDelete" Type="int" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+          <Property Name="DepartmentId" Type="int" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MenuName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="ParentId" Type="int" />
+          <Property Name="PageId" Type="int" />
+          <Property Name="Icon" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="OrderNo" Type="int" />
+          <Property Name="MenuId" Type="int" />
+          <Property Name="UserCreate" Type="int" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" />
+          <Property Name="UserUpdate" Type="int" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="UserDelete" Type="int" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Code" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Info" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Controler" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Action" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserCreate" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserUpdate" Type="nvarchar(max)" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" Nullable="false" />
+          <Property Name="UserDelete" Type="nvarchar(max)" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="RecycleBin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NameRecycle" Type="nvarchar" MaxLength="100" />
+          <Property Name="DescriptionRecycle" Type="nvarchar" MaxLength="100" />
+          <Property Name="TableName" Type="nvarchar" MaxLength="100" />
+          <Property Name="IdParent" Type="int" />
+          <Property Name="Status" Type="bit" />
+          <Property Name="UserCreate" Type="int" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="UserUpdate" Type="int" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="UserDelete" Type="int" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="User_Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userId" Type="int" Nullable="false" />
+          <Property Name="PageId" Type="int" Nullable="false" />
+          <Property Name="UserCreate" Type="int" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" />
+          <Property Name="UserUpdate" Type="int" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="UserDelete" Type="int" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+          <Property Name="isRoleCreate" Type="bit" />
+          <Property Name="isRoleEdit" Type="bit" />
+          <Property Name="isRoleExport" Type="bit" />
+          <Property Name="isRoleExportAll" Type="bit" />
+          <Property Name="isRoleDelete" Type="bit" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccoutType" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SoDienThoai" Type="nvarchar(max)" />
+          <Property Name="HoNV" Type="nvarchar" MaxLength="50" />
+          <Property Name="TenNV" Type="nvarchar" MaxLength="50" />
+          <Property Name="NgaySinh" Type="date" />
+          <Property Name="GioiTinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="NoiSinh" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChiThuongTru" Type="nvarchar" MaxLength="50" />
+          <Property Name="DiaChiTamTru" Type="nvarchar" MaxLength="50" />
+          <Property Name="DanToc" Type="nvarchar" MaxLength="50" />
+          <Property Name="TonGiao" Type="nvarchar" MaxLength="50" />
+          <Property Name="CCCD" Type="int" />
+          <Property Name="NgayCap" Type="date" />
+          <Property Name="NoiCap" Type="nvarchar" MaxLength="500" />
+          <Property Name="MaSoBHXH" Type="nvarchar" MaxLength="50" />
+          <Property Name="TrinhDoVanHoa" Type="nvarchar" MaxLength="150" />
+          <Property Name="TrinhDoChuyenMon" Type="nvarchar" MaxLength="150" />
+          <Property Name="NganhHoc" Type="nvarchar" MaxLength="150" />
+          <Property Name="NoiDaoTao" Type="nvarchar" MaxLength="150" />
+          <Property Name="TrinhDoChinhTri" Type="nvarchar" MaxLength="150" />
+          <Property Name="NgayVaoDangDuBi" Type="date" />
+          <Property Name="NgayVaoDangChinhThuc" Type="date" />
+          <Property Name="ChucDanh" Type="nvarchar" MaxLength="500" />
+          <Property Name="NgayVaoLam" Type="date" />
+          <Property Name="GhiChu" Type="nvarchar(max)" />
+          <Property Name="HieuLuc" Type="bit" />
+          <Property Name="UserCreate" Type="int" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="datetime2" Precision="7" />
+          <Property Name="UserUpdate" Type="int" />
+          <Property Name="DatetimeUpdate" Type="datetime2" Precision="7" />
+          <Property Name="isDelete" Type="bit" />
+          <Property Name="UserDelete" Type="int" />
+          <Property Name="DatetimeDelete" Type="datetime2" Precision="7" />
+          <Property Name="PhongBan" Type="int" />
+        </EntityType>
+        <Association Name="FK_Configs_Configs">
+          <End Role="Configs" Type="Self.Configs" Multiplicity="0..1" />
+          <End Role="Configs1" Type="Self.Configs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Configs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Configs1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deliverys_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Deliverys" Type="Self.Deliverys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deliverys">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deliverys_Departments">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Deliverys" Type="Self.Deliverys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deliverys">
+              <PropertyRef Name="ShippingAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deliverys_Departments1">
+          <End Role="Departments" Type="Self.Departments" Multiplicity="0..1" />
+          <End Role="Deliverys" Type="Self.Deliverys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Departments">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deliverys">
+              <PropertyRef Name="RecipientAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deliverys_Documents">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="0..1" />
+          <End Role="Deliverys" Type="Self.Deliverys" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Deliverys">
+              <PropertyRef Name="IdDocument" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Departments_Configs">
+          <End Role="Configs" Type="Self.Configs" Multiplicity="0..1" />
+          <End Role="Departments" Type="Self.Departments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Configs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="ParentConFig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documents_Folders">
+          <End Role="Folders" Type="Self.Folders" Multiplicity="0..1" />
+          <End Role="Documents" Type="Self.Documents" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Documents">
+              <PropertyRef Name="FolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Files_Documents">
+          <End Role="Documents" Type="Self.Documents" Multiplicity="0..1" />
+          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Documents">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Files">
+              <PropertyRef Name="DoccumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Files_Folders">
+          <End Role="Folders" Type="Self.Folders" Multiplicity="0..1" />
+          <End Role="Files" Type="Self.Files" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Files">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Folders_Categories">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Folders" Type="Self.Folders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Folders">
+              <PropertyRef Name="CategoryDocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Folders_Folders">
+          <End Role="Folders" Type="Self.Folders" Multiplicity="0..1" />
+          <End Role="Folders1" Type="Self.Folders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Folders1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Menu_MenuId">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Page_PageId">
+          <End Role="Page" Type="Self.Page" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Page_AspNetUsers_userId">
+          <End Role="Users" Type="Self.Users" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Page" Type="Self.User_Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Page">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Page_Page_PageId">
+          <End Role="Page" Type="Self.Page" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Page" Type="Self.User_Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Page">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="sp_loadChart" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CurrentYear" Type="int" Mode="In" />
+        </Function>
+        <Function Name="sp_LoadNameFodelChild" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="HuynhPhanThuDongModelStoreContainer">
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Configs" EntityType="Self.Configs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Deliverys" EntityType="Self.Deliverys" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Departments" EntityType="Self.Departments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Documents" EntityType="Self.Documents" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Files" EntityType="Self.Files" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Folders" EntityType="Self.Folders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Menu" EntityType="Self.Menu" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Page" EntityType="Self.Page" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RecycleBin" EntityType="Self.RecycleBin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User_Page" EntityType="Self.User_Page" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Configs_Configs" Association="Self.FK_Configs_Configs">
+            <End Role="Configs" EntitySet="Configs" />
+            <End Role="Configs1" EntitySet="Configs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deliverys_Categories" Association="Self.FK_Deliverys_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Deliverys" EntitySet="Deliverys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deliverys_Departments" Association="Self.FK_Deliverys_Departments">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Deliverys" EntitySet="Deliverys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deliverys_Departments1" Association="Self.FK_Deliverys_Departments1">
+            <End Role="Departments" EntitySet="Departments" />
+            <End Role="Deliverys" EntitySet="Deliverys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deliverys_Documents" Association="Self.FK_Deliverys_Documents">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="Deliverys" EntitySet="Deliverys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Departments_Configs" Association="Self.FK_Departments_Configs">
+            <End Role="Configs" EntitySet="Configs" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documents_Folders" Association="Self.FK_Documents_Folders">
+            <End Role="Folders" EntitySet="Folders" />
+            <End Role="Documents" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_Documents" Association="Self.FK_Files_Documents">
+            <End Role="Documents" EntitySet="Documents" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_Folders" Association="Self.FK_Files_Folders">
+            <End Role="Folders" EntitySet="Folders" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Folders_Categories" Association="Self.FK_Folders_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Folders" EntitySet="Folders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Folders_Folders" Association="Self.FK_Folders_Folders">
+            <End Role="Folders" EntitySet="Folders" />
+            <End Role="Folders1" EntitySet="Folders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu_MenuId" Association="Self.FK_Menu_Menu_MenuId">
+            <End Role="Menu" EntitySet="Menu" />
+            <End Role="Menu1" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Page_PageId" Association="Self.FK_Menu_Page_PageId">
+            <End Role="Page" EntitySet="Page" />
+            <End Role="Menu" EntitySet="Menu" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Page_AspNetUsers_userId" Association="Self.FK_User_Page_AspNetUsers_userId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Page" EntitySet="User_Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Page_Page_PageId" Association="Self.FK_User_Page_Page_PageId">
+            <End Role="Page" EntitySet="Page" />
+            <End Role="User_Page" EntitySet="User_Page" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HuynhPhanThuDongModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionCategory" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="UserCreate" Type="Int32" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserUpdate" Type="Int32" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="UserDelete" Type="Int32" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Folders" Relationship="Self.FK_Folders_Categories" FromRole="Categories" ToRole="Folders" />
+          <NavigationProperty Name="Deliverys" Relationship="HuynhPhanThuDongModel.FK_Deliverys_Categories" FromRole="Category" ToRole="Delivery" />
+        </EntityType>
+        <EntityType Name="Config">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="NameConfig" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionConfig" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="UserCreate" Type="Int32" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserUpdate" Type="Int32" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="UserDelete" Type="Int32" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Configs1" Relationship="Self.FK_Configs_Configs" FromRole="Configs" ToRole="Configs1" />
+          <NavigationProperty Name="Config1" Relationship="Self.FK_Configs_Configs" FromRole="Configs1" ToRole="Configs" />
+          <NavigationProperty Name="Departments" Relationship="Self.FK_Departments_Configs" FromRole="Configs" ToRole="Departments" />
+        </EntityType>
+        <EntityType Name="Department">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentConFig" Type="Int32" />
+          <Property Name="NameDepartment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionDepartment" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AddressDepartment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Icon" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="UserCreate" Type="Int32" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserUpdate" Type="Int32" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="UserDelete" Type="Int32" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Config" Relationship="Self.FK_Departments_Configs" FromRole="Departments" ToRole="Configs" />
+          <NavigationProperty Name="Deliverys" Relationship="HuynhPhanThuDongModel.FK_Deliverys_Departments" FromRole="Department" ToRole="Delivery" />
+          <NavigationProperty Name="Deliverys1" Relationship="HuynhPhanThuDongModel.FK_Deliverys_Departments1" FromRole="Department" ToRole="Delivery" />
+          </EntityType>
+        <EntityType Name="File">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="DoccumentId" Type="Int32" />
+          <Property Name="FileName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="UrlFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileExtension" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="UserCreate" Type="Int32" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserUpdate" Type="Int32" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="UserDelete" Type="Int32" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Folder" Relationship="Self.FK_Files_Folders" FromRole="Files" ToRole="Folders" />
+          <NavigationProperty Name="Document" Relationship="HuynhPhanThuDongModel.FK_Files_Documents" FromRole="File" ToRole="Document" />
+        </EntityType>
+        <EntityType Name="Folder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="CategoryDocumentId" Type="Int32" />
+          <Property Name="NameFolder" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IconFolder" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="UserCreate" Type="Int32" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserUpdate" Type="Int32" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="UserDelete" Type="Int32" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+          <Property Name="DepartmentId" Type="Int32" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Folders_Categories" FromRole="Folders" ToRole="Categories" />
+          <NavigationProperty Name="Files" Relationship="Self.FK_Files_Folders" FromRole="Folders" ToRole="Files" />
+          <NavigationProperty Name="Folders1" Relationship="Self.FK_Folders_Folders" FromRole="Folders" ToRole="Folders1" />
+          <NavigationProperty Name="Folder1" Relationship="Self.FK_Folders_Folders" FromRole="Folders1" ToRole="Folders" />
+          <NavigationProperty Name="Documents" Relationship="HuynhPhanThuDongModel.FK_Documents_Folders" FromRole="Folder" ToRole="Document" />
+        </EntityType>
+        <EntityType Name="Menu">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MenuName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="PageId" Type="Int32" />
+          <Property Name="Icon" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="OrderNo" Type="Int32" />
+          <Property Name="MenuId" Type="Int32" />
+          <Property Name="UserCreate" Type="Int32" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Precision="7" />
+          <Property Name="UserUpdate" Type="Int32" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="UserDelete" Type="Int32" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Menu1" Relationship="Self.FK_Menu_Menu_MenuId" FromRole="Menu" ToRole="Menu1" />
+          <NavigationProperty Name="Menu2" Relationship="Self.FK_Menu_Menu_MenuId" FromRole="Menu1" ToRole="Menu" />
+          <NavigationProperty Name="Page" Relationship="Self.FK_Menu_Page_PageId" FromRole="Menu" ToRole="Page" />
+        </EntityType>
+        <EntityType Name="Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Code" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Info" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Controler" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Action" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserCreate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserUpdate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" Nullable="false" />
+          <Property Name="UserDelete" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+          <NavigationProperty Name="Menus" Relationship="Self.FK_Menu_Page_PageId" FromRole="Page" ToRole="Menu" />
+          <NavigationProperty Name="User_Page" Relationship="Self.FK_User_Page_Page_PageId" FromRole="Page" ToRole="User_Page" />
+        </EntityType>
+        <EntityType Name="RecycleBin">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NameRecycle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DescriptionRecycle" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TableName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="IdParent" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="UserCreate" Type="Int32" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserUpdate" Type="Int32" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="UserDelete" Type="Int32" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+        </EntityType>
+        <EntityType Name="User_Page">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userId" Type="Int32" Nullable="false" />
+          <Property Name="PageId" Type="Int32" Nullable="false" />
+          <Property Name="UserCreate" Type="Int32" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Precision="7" />
+          <Property Name="UserUpdate" Type="Int32" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="UserDelete" Type="Int32" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+          <Property Name="isRoleCreate" Type="Boolean" />
+          <Property Name="isRoleEdit" Type="Boolean" />
+          <Property Name="isRoleExport" Type="Boolean" />
+          <Property Name="isRoleExportAll" Type="Boolean" />
+          <Property Name="isRoleDelete" Type="Boolean" />
+          <NavigationProperty Name="Page" Relationship="Self.FK_User_Page_Page_PageId" FromRole="User_Page" ToRole="Page" />
+          <NavigationProperty Name="User" Relationship="Self.FK_User_Page_AspNetUsers_userId" FromRole="User_Page" ToRole="Users" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccoutType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SoDienThoai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HoNV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TenNV" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NgaySinh" Type="DateTime" Precision="0" />
+          <Property Name="GioiTinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="NoiSinh" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChiThuongTru" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DiaChiTamTru" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="DanToc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TonGiao" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CCCD" Type="Int32" />
+          <Property Name="NgayCap" Type="DateTime" Precision="0" />
+          <Property Name="NoiCap" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="MaSoBHXH" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TrinhDoVanHoa" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TrinhDoChuyenMon" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="NganhHoc" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="NoiDaoTao" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="TrinhDoChinhTri" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="NgayVaoDangDuBi" Type="DateTime" Precision="0" />
+          <Property Name="NgayVaoDangChinhThuc" Type="DateTime" Precision="0" />
+          <Property Name="ChucDanh" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="NgayVaoLam" Type="DateTime" Precision="0" />
+          <Property Name="GhiChu" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HieuLuc" Type="Boolean" />
+          <Property Name="UserCreate" Type="Int32" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Precision="7" />
+          <Property Name="UserUpdate" Type="Int32" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="UserDelete" Type="Int32" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+          <Property Name="PhongBan" Type="Int32" />
+          <NavigationProperty Name="User_Page" Relationship="Self.FK_User_Page_AspNetUsers_userId" FromRole="Users" ToRole="User_Page" />
+        </EntityType>
+        <Association Name="FK_Folders_Categories">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Folders" Type="Self.Folder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Folders">
+              <PropertyRef Name="CategoryDocumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Configs_Configs">
+          <End Role="Configs" Type="Self.Config" Multiplicity="0..1" />
+          <End Role="Configs1" Type="Self.Config" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Configs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Configs1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Departments_Configs">
+          <End Role="Configs" Type="Self.Config" Multiplicity="0..1" />
+          <End Role="Departments" Type="Self.Department" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Configs">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Departments">
+              <PropertyRef Name="ParentConFig" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Files_Folders">
+          <End Role="Folders" Type="Self.Folder" Multiplicity="0..1" />
+          <End Role="Files" Type="Self.File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Files">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Folders_Folders">
+          <End Role="Folders" Type="Self.Folder" Multiplicity="0..1" />
+          <End Role="Folders1" Type="Self.Folder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folders">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Folders1">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Menu_MenuId">
+          <End Role="Menu" Type="Self.Menu" Multiplicity="0..1" />
+          <End Role="Menu1" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Menu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menu1">
+              <PropertyRef Name="MenuId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Menu_Page_PageId">
+          <End Role="Page" Type="Self.Page" Multiplicity="0..1" />
+          <End Role="Menu" Type="Self.Menu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Menu">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Page_Page_PageId">
+          <End Role="Page" Type="Self.Page" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Page" Type="Self.User_Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Page">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Page">
+              <PropertyRef Name="PageId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_User_Page_AspNetUsers_userId">
+          <End Role="Users" Type="Self.User" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="User_Page" Type="Self.User_Page" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User_Page">
+              <PropertyRef Name="userId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="QuanLiVanBanEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Configs" EntityType="Self.Config" />
+          <EntitySet Name="Departments" EntityType="Self.Department" />
+          <EntitySet Name="Files" EntityType="Self.File" />
+          <EntitySet Name="Folders" EntityType="Self.Folder" />
+          <EntitySet Name="Menus" EntityType="Self.Menu" />
+          <EntitySet Name="Pages" EntityType="Self.Page" />
+          <EntitySet Name="RecycleBins" EntityType="Self.RecycleBin" />
+          <EntitySet Name="User_Page" EntityType="Self.User_Page" />
+          <EntitySet Name="Users" EntityType="Self.User" />
+          <AssociationSet Name="FK_Folders_Categories" Association="Self.FK_Folders_Categories">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Folders" EntitySet="Folders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Configs_Configs" Association="Self.FK_Configs_Configs">
+            <End Role="Configs" EntitySet="Configs" />
+            <End Role="Configs1" EntitySet="Configs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Departments_Configs" Association="Self.FK_Departments_Configs">
+            <End Role="Configs" EntitySet="Configs" />
+            <End Role="Departments" EntitySet="Departments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_Folders" Association="Self.FK_Files_Folders">
+            <End Role="Folders" EntitySet="Folders" />
+            <End Role="Files" EntitySet="Files" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Folders_Folders" Association="Self.FK_Folders_Folders">
+            <End Role="Folders" EntitySet="Folders" />
+            <End Role="Folders1" EntitySet="Folders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Menu_MenuId" Association="Self.FK_Menu_Menu_MenuId">
+            <End Role="Menu" EntitySet="Menus" />
+            <End Role="Menu1" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Menu_Page_PageId" Association="Self.FK_Menu_Page_PageId">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="Menu" EntitySet="Menus" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Page_Page_PageId" Association="Self.FK_User_Page_Page_PageId">
+            <End Role="Page" EntitySet="Pages" />
+            <End Role="User_Page" EntitySet="User_Page" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Page_AspNetUsers_userId" Association="Self.FK_User_Page_AspNetUsers_userId">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="User_Page" EntitySet="User_Page" />
+          </AssociationSet>
+          <FunctionImport Name="sp_LoadNameFodelChild" ReturnType="Collection(HuynhPhanThuDongModel.sp_LoadNameFodelChild_Result)" />
+          <EntitySet Name="Deliverys" EntityType="HuynhPhanThuDongModel.Delivery" />
+          <EntitySet Name="sysdiagrams" EntityType="HuynhPhanThuDongModel.sysdiagram" />
+          <AssociationSet Name="FK_Deliverys_Categories" Association="HuynhPhanThuDongModel.FK_Deliverys_Categories">
+            <End Role="Category" EntitySet="Categories" />
+            <End Role="Delivery" EntitySet="Deliverys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deliverys_Departments" Association="HuynhPhanThuDongModel.FK_Deliverys_Departments">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Delivery" EntitySet="Deliverys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Deliverys_Departments1" Association="HuynhPhanThuDongModel.FK_Deliverys_Departments1">
+            <End Role="Department" EntitySet="Departments" />
+            <End Role="Delivery" EntitySet="Deliverys" />
+          </AssociationSet>
+          <EntitySet Name="Documents" EntityType="HuynhPhanThuDongModel.Document" />
+          <AssociationSet Name="FK_Deliverys_Documents" Association="HuynhPhanThuDongModel.FK_Deliverys_Documents">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="Delivery" EntitySet="Deliverys" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Documents_Folders" Association="HuynhPhanThuDongModel.FK_Documents_Folders">
+            <End Role="Folder" EntitySet="Folders" />
+            <End Role="Document" EntitySet="Documents" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Files_Documents" Association="HuynhPhanThuDongModel.FK_Files_Documents">
+            <End Role="Document" EntitySet="Documents" />
+            <End Role="File" EntitySet="Files" />
+          </AssociationSet>
+          <FunctionImport Name="sp_loadChart" ReturnType="Collection(HuynhPhanThuDongModel.sp_loadChart_Result)">
+            <Parameter Name="CurrentYear" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="sp_LoadNameFodelChild_Result">
+          <Property Type="String" Name="Hierarchy" Nullable="true" />
+          <Property Type="Int32" Name="LastChildID" Nullable="true" />
+          <Property Type="Int32" Name="TopLevelParentId" Nullable="true" />
+          <Property Type="Int32" Name="DepartmentId" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Delivery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdDocument" Type="Int32" />
+          <Property Name="ShippingAddressId" Type="Int32" />
+          <Property Name="RecipientAddressId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="UserCreate" Type="Int32" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserUpdate" Type="Int32" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="UserDelete" Type="Int32" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+          <Property Name="GuiId" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="ParentId" Type="Int32" />
+          <Property Name="UserAuthorization" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="HuynhPhanThuDongModel.FK_Deliverys_Categories" FromRole="Delivery" ToRole="Category" />
+          <NavigationProperty Name="Department" Relationship="HuynhPhanThuDongModel.FK_Deliverys_Departments" FromRole="Delivery" ToRole="Department" />
+          <NavigationProperty Name="Department1" Relationship="HuynhPhanThuDongModel.FK_Deliverys_Departments1" FromRole="Delivery" ToRole="Department" />
+          <NavigationProperty Name="Document" Relationship="HuynhPhanThuDongModel.FK_Deliverys_Documents" FromRole="Delivery" ToRole="Document" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Deliverys_Categories">
+          <End Type="HuynhPhanThuDongModel.Category" Role="Category" Multiplicity="0..1" />
+          <End Type="HuynhPhanThuDongModel.Delivery" Role="Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Category">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="ParentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deliverys_Departments">
+          <End Type="HuynhPhanThuDongModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="HuynhPhanThuDongModel.Delivery" Role="Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="ShippingAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Deliverys_Departments1">
+          <End Type="HuynhPhanThuDongModel.Department" Role="Department" Multiplicity="0..1" />
+          <End Type="HuynhPhanThuDongModel.Delivery" Role="Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Department">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="RecipientAddressId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeDocument" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TitleDocument" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AbstractDocument" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DatePublish" Type="DateTime" Precision="7" />
+          <Property Name="UrlFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FolderId" Type="Int32" />
+          <Property Name="Status" Type="Boolean" />
+          <Property Name="UserCreate" Type="Int32" Nullable="false" />
+          <Property Name="DatetimeCreate" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="UserUpdate" Type="Int32" />
+          <Property Name="DatetimeUpdate" Type="DateTime" Precision="7" />
+          <Property Name="isDelete" Type="Boolean" />
+          <Property Name="UserDelete" Type="Int32" />
+          <Property Name="DatetimeDelete" Type="DateTime" Precision="7" />
+          <Property Name="FileExtension" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsDoc" Type="Boolean" />
+          <NavigationProperty Name="Deliverys" Relationship="HuynhPhanThuDongModel.FK_Deliverys_Documents" FromRole="Document" ToRole="Delivery" />
+          <NavigationProperty Name="Folder" Relationship="HuynhPhanThuDongModel.FK_Documents_Folders" FromRole="Document" ToRole="Folder" />
+          <NavigationProperty Name="Files" Relationship="HuynhPhanThuDongModel.FK_Files_Documents" FromRole="Document" ToRole="File" />
+        </EntityType>
+        <Association Name="FK_Deliverys_Documents">
+          <End Type="HuynhPhanThuDongModel.Document" Role="Document" Multiplicity="0..1" />
+          <End Type="HuynhPhanThuDongModel.Delivery" Role="Delivery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Delivery">
+              <PropertyRef Name="IdDocument" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Documents_Folders">
+          <End Type="HuynhPhanThuDongModel.Folder" Role="Folder" Multiplicity="0..1" />
+          <End Type="HuynhPhanThuDongModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Folder">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="FolderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Files_Documents">
+          <End Type="HuynhPhanThuDongModel.Document" Role="Document" Multiplicity="0..1" />
+          <End Type="HuynhPhanThuDongModel.File" Role="File" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Document">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="File">
+              <PropertyRef Name="DoccumentId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="sp_loadChart_Result">
+          <Property Type="Int32" Name="MonthNumber" Nullable="true" />
+          <Property Type="Int32" Name="VanBanDi" Nullable="true" />
+          <Property Type="Int32" Name="VanBanDen" Nullable="true" />
+          <Property Type="Int32" Name="VanBanNoiBo" Nullable="true" />
+          <Property Type="Int32" Name="TaiLieu" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HuynhPhanThuDongModelStoreContainer" CdmEntityContainer="QuanLiVanBanEntities">
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NameCategory" ColumnName="NameCategory" />
+                <ScalarProperty Name="DescriptionCategory" ColumnName="DescriptionCategory" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Configs">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.Config">
+              <MappingFragment StoreEntitySet="Configs">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="NameConfig" ColumnName="NameConfig" />
+                <ScalarProperty Name="DescriptionConfig" ColumnName="DescriptionConfig" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Departments">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.Department">
+              <MappingFragment StoreEntitySet="Departments">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentConFig" ColumnName="ParentConFig" />
+                <ScalarProperty Name="NameDepartment" ColumnName="NameDepartment" />
+                <ScalarProperty Name="DescriptionDepartment" ColumnName="DescriptionDepartment" />
+                <ScalarProperty Name="AddressDepartment" ColumnName="AddressDepartment" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Files">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.File">
+              <MappingFragment StoreEntitySet="Files">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="DoccumentId" ColumnName="DoccumentId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="UrlFile" ColumnName="UrlFile" />
+                <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Folders">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.Folder">
+              <MappingFragment StoreEntitySet="Folders">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="CategoryDocumentId" ColumnName="CategoryDocumentId" />
+                <ScalarProperty Name="NameFolder" ColumnName="NameFolder" />
+                <ScalarProperty Name="IconFolder" ColumnName="IconFolder" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Menus">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.Menu">
+              <MappingFragment StoreEntitySet="Menu">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="MenuName" ColumnName="MenuName" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="Icon" ColumnName="Icon" />
+                <ScalarProperty Name="OrderNo" ColumnName="OrderNo" />
+                <ScalarProperty Name="MenuId" ColumnName="MenuId" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pages">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.Page">
+              <MappingFragment StoreEntitySet="Page">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Info" ColumnName="Info" />
+                <ScalarProperty Name="Controler" ColumnName="Controler" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RecycleBins">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.RecycleBin">
+              <MappingFragment StoreEntitySet="RecycleBin">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="NameRecycle" ColumnName="NameRecycle" />
+                <ScalarProperty Name="DescriptionRecycle" ColumnName="DescriptionRecycle" />
+                <ScalarProperty Name="TableName" ColumnName="TableName" />
+                <ScalarProperty Name="IdParent" ColumnName="IdParent" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User_Page">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.User_Page">
+              <MappingFragment StoreEntitySet="User_Page">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="userId" ColumnName="userId" />
+                <ScalarProperty Name="PageId" ColumnName="PageId" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+                <ScalarProperty Name="isRoleCreate" ColumnName="isRoleCreate" />
+                <ScalarProperty Name="isRoleEdit" ColumnName="isRoleEdit" />
+                <ScalarProperty Name="isRoleExport" ColumnName="isRoleExport" />
+                <ScalarProperty Name="isRoleExportAll" ColumnName="isRoleExportAll" />
+                <ScalarProperty Name="isRoleDelete" ColumnName="isRoleDelete" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="AccoutType" ColumnName="AccoutType" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SoDienThoai" ColumnName="SoDienThoai" />
+                <ScalarProperty Name="HoNV" ColumnName="HoNV" />
+                <ScalarProperty Name="TenNV" ColumnName="TenNV" />
+                <ScalarProperty Name="NgaySinh" ColumnName="NgaySinh" />
+                <ScalarProperty Name="GioiTinh" ColumnName="GioiTinh" />
+                <ScalarProperty Name="NoiSinh" ColumnName="NoiSinh" />
+                <ScalarProperty Name="DiaChiThuongTru" ColumnName="DiaChiThuongTru" />
+                <ScalarProperty Name="DiaChiTamTru" ColumnName="DiaChiTamTru" />
+                <ScalarProperty Name="DanToc" ColumnName="DanToc" />
+                <ScalarProperty Name="TonGiao" ColumnName="TonGiao" />
+                <ScalarProperty Name="CCCD" ColumnName="CCCD" />
+                <ScalarProperty Name="NgayCap" ColumnName="NgayCap" />
+                <ScalarProperty Name="NoiCap" ColumnName="NoiCap" />
+                <ScalarProperty Name="MaSoBHXH" ColumnName="MaSoBHXH" />
+                <ScalarProperty Name="TrinhDoVanHoa" ColumnName="TrinhDoVanHoa" />
+                <ScalarProperty Name="TrinhDoChuyenMon" ColumnName="TrinhDoChuyenMon" />
+                <ScalarProperty Name="NganhHoc" ColumnName="NganhHoc" />
+                <ScalarProperty Name="NoiDaoTao" ColumnName="NoiDaoTao" />
+                <ScalarProperty Name="TrinhDoChinhTri" ColumnName="TrinhDoChinhTri" />
+                <ScalarProperty Name="NgayVaoDangDuBi" ColumnName="NgayVaoDangDuBi" />
+                <ScalarProperty Name="NgayVaoDangChinhThuc" ColumnName="NgayVaoDangChinhThuc" />
+                <ScalarProperty Name="ChucDanh" ColumnName="ChucDanh" />
+                <ScalarProperty Name="NgayVaoLam" ColumnName="NgayVaoLam" />
+                <ScalarProperty Name="GhiChu" ColumnName="GhiChu" />
+                <ScalarProperty Name="HieuLuc" ColumnName="HieuLuc" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+                <ScalarProperty Name="PhongBan" ColumnName="PhongBan" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_LoadNameFodelChild" FunctionName="HuynhPhanThuDongModel.Store.sp_LoadNameFodelChild">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HuynhPhanThuDongModel.sp_LoadNameFodelChild_Result">
+                <ScalarProperty Name="Hierarchy" ColumnName="Hierarchy" />
+                <ScalarProperty Name="LastChildID" ColumnName="LastChildID" />
+                <ScalarProperty Name="TopLevelParentId" ColumnName="TopLevelParentId" />
+                <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Deliverys">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.Delivery">
+              <MappingFragment StoreEntitySet="Deliverys">
+                <ScalarProperty Name="UserAuthorization" ColumnName="UserAuthorization" />
+                <ScalarProperty Name="ParentId" ColumnName="ParentId" />
+                <ScalarProperty Name="GuiId" ColumnName="GuiId" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RecipientAddressId" ColumnName="RecipientAddressId" />
+                <ScalarProperty Name="ShippingAddressId" ColumnName="ShippingAddressId" />
+                <ScalarProperty Name="IdDocument" ColumnName="IdDocument" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Documents">
+            <EntityTypeMapping TypeName="HuynhPhanThuDongModel.Document">
+              <MappingFragment StoreEntitySet="Documents">
+                <ScalarProperty Name="IsDoc" ColumnName="IsDoc" />
+                <ScalarProperty Name="FileExtension" ColumnName="FileExtension" />
+                <ScalarProperty Name="DatetimeDelete" ColumnName="DatetimeDelete" />
+                <ScalarProperty Name="UserDelete" ColumnName="UserDelete" />
+                <ScalarProperty Name="isDelete" ColumnName="isDelete" />
+                <ScalarProperty Name="DatetimeUpdate" ColumnName="DatetimeUpdate" />
+                <ScalarProperty Name="UserUpdate" ColumnName="UserUpdate" />
+                <ScalarProperty Name="DatetimeCreate" ColumnName="DatetimeCreate" />
+                <ScalarProperty Name="UserCreate" ColumnName="UserCreate" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="FolderId" ColumnName="FolderId" />
+                <ScalarProperty Name="UrlFile" ColumnName="UrlFile" />
+                <ScalarProperty Name="DatePublish" ColumnName="DatePublish" />
+                <ScalarProperty Name="AbstractDocument" ColumnName="AbstractDocument" />
+                <ScalarProperty Name="TitleDocument" ColumnName="TitleDocument" />
+                <ScalarProperty Name="CodeDocument" ColumnName="CodeDocument" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="sp_loadChart" FunctionName="HuynhPhanThuDongModel.Store.sp_loadChart">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="HuynhPhanThuDongModel.sp_loadChart_Result">
+                <ScalarProperty Name="MonthNumber" ColumnName="MonthNumber" />
+                <ScalarProperty Name="VanBanDi" ColumnName="VanBanDi" />
+                <ScalarProperty Name="VanBanDen" ColumnName="VanBanDen" />
+                <ScalarProperty Name="VanBanNoiBo" ColumnName="VanBanNoiBo" />
+                <ScalarProperty Name="TaiLieu" ColumnName="TaiLieu" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

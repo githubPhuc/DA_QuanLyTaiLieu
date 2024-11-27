@@ -1,0 +1,131 @@
+﻿
+@{
+    ViewBag.Title = "Thùng rác";
+    var user = ViewBag.user as ToolsApp.EntityFramework.User;
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary border-no-color card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <b>TÌM KIẾM THEO TỪ KHÓA</b>
+                        </h3>
+                    </div>
+                    <div class="card-body pad">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tên item</label>
+                                    <input class="form-control form-control-md" type="text" autocomplete="off" id="NameRecycleSearch" name="NameRecycleSearch" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Từ ngày</label>
+                                    <input value="@DateTime.Now.AddDays(-10).ToString("dd/MM/yyyy")"
+                                           class="form-control" type="text" autocomplete="off"
+                                           id="DatetimeCreateStartSearch" name="DatetimeCreateStartSearch" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Đến ngày</label>
+                                    <input value="@DateTime.Now.ToString("dd/MM/yyyy")"
+                                           class="form-control" type="text" autocomplete="off"
+                                           id="DatetimeCreateEndSearch" name="DatetimeCreateEndSearch" />
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <button id="btnSearch" type="button" class="btn bg-gradient-primary"><i class="fa fa-search"></i>&nbsp;Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <b>KẾT QUẢ</b>
+                        </h3>
+                    </div>
+                    <div class="card-body pad">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <button id="btnCreate" type="button" class="btn bg-gradient-success"><i class="fa fa-plus"></i>&nbsp;Thêm</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mt-4 table-body table-responsive">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+
+
+@section scripts{
+    <script>
+        $("#DatetimeCreateStartSearch").datepicker({
+            format: 'dd/MM/yyyy',
+            changeYear: true,
+            changeMonth: true,
+            onClose: function (selectedDate) {
+                //$("#FromDate").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#DatetimeCreateEndSearch").datepicker({
+            format: 'dd/MM/yyyy',
+            changeYear: true,
+            changeMonth: true,
+            onClose: function (selectedDate) {
+                //$("#FromDate").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        var myModal = {
+             $modal : $('#myModal'),
+            $myModalContent : $("#myModalContent"),
+            $myModalTitle: $("#myModalTitle")
+        }
+          var paramsLoadData = [
+            true,
+            '@Url.Action("GetList")',
+              '#NameRecycleSearch', '#DatetimeCreateStartSearch', '#DatetimeCreateEndSearch',
+        ];
+
+        function Delete(id_) {
+            if (confirm('Bạn có chắc chắn muốn xóa?')) {
+                Action('@Url.Action("_DeleteFun")', 'POST', { Id: id_ }, paramsLoadData)
+            }
+        }
+        function RollBack(id_) {
+            if (confirm('Bạn có chắc chắn muốn khôi phục dữ liệu này?')) {
+                Action('@Url.Action("_RollBack")', 'POST', { Id: id_ }, paramsLoadData)
+            }
+        }
+        $(document).ready(function () {
+            loadData(...paramsLoadData);
+            $("#myModal").on("hidden.bs.modal", function () {
+                loadData(false);
+            });
+            $("#btnSearch").click(function () {
+                loadData(...paramsLoadData);
+            });
+        });
+    </script>
+}
+}

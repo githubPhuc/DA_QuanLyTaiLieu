@@ -1,0 +1,68 @@
+﻿
+@{
+    ViewBag.Title = "GetList";
+    var data = ViewBag.RecycleBins as List<ToolsApp.Models.RecycleBinModels>;
+}
+<table id="myTable" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Tên item</th>
+            <th>Mô tả</th>
+            <th>Table - id</th>
+            <th>Nguời tạo</th>
+            <th>Ngày tạo</th>
+            <th>Nguời cập nhật</th>
+            <th>Ngày cập nhật</th>
+            <th>Tình trạng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var STT = 1; }
+        @{
+            if (data != null)
+            {
+                foreach (var item in data)
+                {
+                <tr>
+                    <td>
+                        <a onclick="Delete('@item.Id')" class="btn btn-danger btn-custom">
+                            <i class="far fa-trash-alt"></i> Xóa
+                        </a>
+                        <a onclick="RollBack('@item.Id')" class="btn btn-primary btn-custom">
+                            <i class="far fa-trash-alt"></i> Khôi phục
+                        </a>
+                    </td>
+                    <td>@item.NameRecycle</td>
+                    <td>@item.DescriptionRecycle</td>
+                    <td>@item.TableName - @item.IdParent</td>
+                    <td>@item.NameUserCreate</td>
+                    <td>@(item.DatetimeCreate.ToString("dd/MM/yyyy"))</td>
+                    <td>@item.NameUserUpdate</td>
+                    <td>@(item.DatetimeUpdate.HasValue ? item.DatetimeUpdate.Value.ToString("dd/MM/yyyy") : "N/A")</td>
+                    <td>
+                        @if (item.Status == true)
+                        {
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-circle" style="color: green;"></i>
+                                <span class="ml-1">Active</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-flex align-items-center">
+                                <i class="fa-solid fa-circle" style="color: red;"></i>
+                                <span class="ml-1">Inactive</span>
+                            </div>
+                        }
+                    </td>
+                </tr>
+
+                    STT++;
+                }
+            }
+           
+        }
+
+        </tbody>
+    </table>

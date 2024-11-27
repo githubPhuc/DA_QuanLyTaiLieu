@@ -1,0 +1,327 @@
+﻿
+@{
+    ViewBag.Title = "Quản lý văn bản nội bộ";
+    var user = ViewBag.user as ToolsApp.EntityFramework.User;
+}
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary border-no-color card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <b>TÌM KIẾM THEO TỪ KHÓA</b>
+                        </h3>
+                    </div>
+                    <div class="card-body pad">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Tiêu đề văn bản</label>
+                                    <input class="form-control form-control-md" type="text" autocomplete="off" id="NameTitleSearch" name="NameTitleSearch" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Từ ngày</label>
+                                    <input value="@DateTime.Now.AddDays(-10).ToString("dd/MM/yyyy")"
+                                           class="form-control" type="text" autocomplete="off"
+                                           id="DatetimeCreateStartSearch" name="DatetimeCreateStartSearch" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label>Đến ngày</label>
+                                    <input value="@DateTime.Now.ToString("dd/MM/yyyy")"
+                                           class="form-control" type="text" autocomplete="off"
+                                           id="DatetimeCreateEndSearch" name="DatetimeCreateEndSearch" />
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-8">
+                                <button id="btnSearch" type="button" class="btn bg-gradient-primary"><i class="fa fa-search"></i>&nbsp;Tìm kiếm</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-primary card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <b>KẾT QUẢ</b>
+                        </h3>
+                    </div>
+                    <div class="card-body pad">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <button id="btnCreate" type="button" class="btn bg-gradient-success"><i class="fa fa-plus"></i>&nbsp;Thêm di chuyển đi</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 mt-4 table-body table-responsive">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+            <!-- /.col -->
+        </div>
+    </div>
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content custom-modal-css">
+                @using (Html.BeginForm(null, null, FormMethod.Get, new { name = "frm", id = "frm", enctype = "multipart/form-data" }))
+                {
+
+                    <div class="modal-header custom-modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold" id="myModalTitle"></h4>
+                        <button type="button" style="color: white" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body mx-3">
+                        <div id="myModalContent">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer modal-custom-footer footer d-flex ">
+                        <button type="button" id="btSave" class="btn btn-sm btn-success"><i class="fa fa-save"></i>&nbsp;Lưu</button>
+                        <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-close"></i>&nbsp;Đóng</button>
+                    </div>
+                }
+
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModalViewFile" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content custom-modal-css">
+                <div class="modal-header custom-modal-header text-center">
+                    <h4 class="modal-title w-100 font-weight-bold" id="myModalTitleViewFile"></h4>
+                    <button type="button" style="color: white" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body mx-3">
+                    <div id="myModalContentViewFile">
+                    </div>
+
+                </div>
+                <div class="modal-footer modal-custom-footer footer d-flex ">
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-close"></i>&nbsp;Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="myModalToggle2" aria-hidden="true" aria-labelledby="myModalTitle2" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog  modal-xl modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="myModalTitle2"></h1>
+                    <button type="button" style="color: black" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="myModalContent2" style="height: 80vh;">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" onclick="Download()" class="btn btn-primary">Download</button>
+                    <button type="button" class="btn btn-danger btn-sm" data-dismiss="modal"><i class="fa fa-close"></i>&nbsp;Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section scripts{
+    <script>
+        var myModal = {
+            $modal: $('#myModal'),
+            $myModalContent: $("#myModalContent"),
+            $myModalTitle: $("#myModalTitle")
+        }
+        $("#DatetimeCreateStartSearch").datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            changeMonth: true,
+            onClose: function (selectedDate) {
+                //$("#FromDate").datepicker("option", "minDate", selectedDate);
+            }
+        });
+        $("#DatetimeCreateEndSearch").datepicker({
+            format: 'dd/mm/yyyy',
+            changeYear: true,
+            changeMonth: true,
+            onClose: function (selectedDate) {
+                //$("#FromDate").datepicker("option", "minDate", selectedDate);
+            }
+        });
+
+        var myModal = {
+             $modal : $('#myModal'),
+            $myModalContent : $("#myModalContent"),
+            $myModalTitle: $("#myModalTitle")
+        }
+          var paramsLoadData = [
+            true,
+            '@Url.Action("GetList")',
+              '#NameTitleSearch', '#DatetimeCreateStartSearch', '#DatetimeCreateEndSearch',
+        ];
+        function Edit(Id) {
+            loadModal('CẬP NHẬT', '@Url.Action("Edit")', myModal, { Id: Id})
+        }
+        function viewedit(id) {
+            window.location = "https://localhost:44338/InternalDocument/Update?id=" + id;
+
+        }
+        function Delete(id_) {
+            if (confirm('Bạn có chắc chắn muốn xóa?')) {
+                Action('@Url.Action("_DeleteFun")', 'POST', { Id: id_ }, paramsLoadData)
+            }
+        }
+        $(document).ready(function () {
+            loadData(...paramsLoadData);
+            $("#myModal").on("hidden.bs.modal", function () {
+                loadData(false);
+            });
+            $("#btnSearch").click(function () {
+                loadData(...paramsLoadData);
+            });
+            $("#btnCreate").click(function () {
+                 window.location = "@Url.Action("Insert", "InternalDocument")";
+            });
+            $("#btSave").click(function () {
+                var formData = {
+                    id: $("#id").val(),
+                    IdDocument: $("#IdDocuments").val(),
+                    RecipientAddressId: $("#IdRecipientAddress").val(),
+                }
+                console.log(formData);
+                Action('@Url.Action("_EditFun")', 'POST', formData, paramsLoadData)
+                myModal.$modal.modal('hide');
+            });
+        });
+        function CopyItem(Id) {
+            $.ajax({
+                url: "@Url.Action("_CopyItem")",
+                type: 'POST',
+                data: { Id: Id},
+            }).done((result) => {
+                if (result.status == 1) {
+                    notify(result.text, "success");
+                    loadData(...paramsLoadData);
+                }
+                else {
+                    notify(result.text, "error")
+                }
+            }).error((result) => {
+                notify(result.text, "error")
+                console.log(result);
+            });
+        }
+        var myModalViewFile = {
+            $modal: $('#myModalViewFile'),
+            $myModalContent: $("#myModalContentViewFile"),
+            $myModalTitle: $("#myModalTitleViewFile")
+        }
+        function ViewFile(Id) {
+            loadModal('Xem file', '@Url.Action("ViewFile", "DocumentManagement")', myModalViewFile, { Id: Id})
+        }
+        function DownloadFiles(id) {
+            $.ajax({
+                url: '@Url.Action("DownloadFiles","DocumentManagement")',
+                type: 'POST',
+                data: { id: id },
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function (data) {
+                    console.log(data)
+                    if (data.success == false) {
+                        notify(data.message, 'error');
+                    } else {
+                        notify('File is ready to download', 'success');
+                        var blob = new Blob([data], { type: 'application/zip' });
+                        var link = document.createElement('a');
+                        link.href = window.URL.createObjectURL(blob);
+                        link.download = 'File_' + id + '.zip';
+                        link.click();
+                        window.URL.revokeObjectURL(link.href);
+                    }
+                },
+                error: function (data) {
+                    console.log(data)
+                    notify('Có lỗi xảy ra: ' + data.message,"error");
+
+                }
+            });
+
+        }
+        var Modal2 = {
+
+            $modal: $('#myModalToggle2'),
+            $myModalContent: $("#myModalContent2"),
+            $myModalTitle: $("#myModalTitle2")
+        }
+        function viewFile() {
+            var UrlFile = $("#UrlFile").val();
+            if (UrlFile !== "" && UrlFile.length > 0) {
+                Modal2.$myModalTitle.html("Nội dung");
+                var fileType = getFileExtension(UrlFile);
+                let modalBody;
+                switch (fileType) {
+                    case 'pdf':
+                        modalBody = `<iframe src="${UrlFile}" width="100%" height="100%"></iframe>`;
+                        break;
+                    case 'jpg':
+                    case 'png':
+                        modalBody = `<img src="${UrlFile}" style="width:100%; height:100%"/>`;
+                        break;
+                    case 'docx':
+                        modalBody = `<iframe src="https://docs.google.com/gview?url=${UrlFile}&embedded=true" width="100%" height="100%"></iframe>`;
+                        break;
+                    case 'pptx':
+                        modalBody = `<iframe src="https://view.officeapps.live.com/op/embed.aspx?src=${UrlFile}" width="100%" height="100%"></iframe>`;
+                        break;
+                    case 'xlsx':
+                        modalBody = `<iframe src="https://view.officeapps.live.com/op/embed.aspx?src=${UrlFile}" width="100%" height="100%"></iframe>`;
+                        break;
+                    case 'txt':
+                        fetch(UrlFile)
+                            .then(response => response.text())
+                            .then(data => {
+                                modalBody = `<pre>${data}</pre>`;
+                            })
+                            .catch(err => {
+                                modalBody = 'Unable to load content file.';
+                            });
+                        break;
+                    default:
+                        modalBody = 'File type not supported.';
+                }
+                Modal2.$myModalContent.html(modalBody);
+                Modal2.$modal.modal();
+            }
+        }
+        function getFileExtension(url) {
+            const lastDotPosition = url.lastIndexOf('.');
+            if (lastDotPosition !== -1) {
+                return url.substring(lastDotPosition + 1);
+            }
+            return null;
+        }
+    </script>
+}

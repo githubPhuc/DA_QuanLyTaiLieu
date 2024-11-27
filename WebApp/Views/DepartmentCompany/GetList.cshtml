@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewBag.Title = "GetList";
+    var data = ViewBag.data as List<ToolsApp.Models.DepartmentCompanyModels>;
+}
+<table id="myTable" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th></th>
+            <th>Tên công ty</th>
+            <th>Tên phòng ban</th>
+            <th>Mã phòng ban</th>
+            <th>Địa chỉ</th>
+            <th>Icon</th>
+            <th>Nguời tạo</th>
+            <th>Ngày tạo</th>
+            <th>Nguời cập nhật</th>
+            <th>Ngày cập nhật</th>
+            <th>Tình trạng</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{ var STT = 1; }
+        @{
+            if (data != null)
+            {
+                foreach (var item in data)
+                {
+                    <tr>
+                        <td>
+
+                            <a onclick="Edit('@item.Id')" class="btn btn-secondary btn-custom">
+                                <i class="fas fa-edit"></i> Sửa
+                            </a>
+                            <a onclick="Delete('@item.Id')" class="btn btn-danger btn-custom">
+                                <i class="far fa-trash-alt"></i> Xóa
+                            </a>
+                        </td>
+                        <td>@item.NameConfig</td>
+                        <td>@item.NameDepartment</td>
+                        <td>@item.DescriptionDepartment</td>
+                        <td>@item.AddressDepartment</td>
+                        <td>@Html.Raw(item.Icon)</td>
+                        <td>@item.NameUserCreate</td>
+                        <td>@(item.DatetimeCreate.ToString("dd/MM/yyyy"))</td>
+                        <td>@item.NameUserUpdate</td>
+                        <td>@(item.DatetimeUpdate.HasValue ? item.DatetimeUpdate.Value.ToString("dd/MM/yyyy") : "N/A")</td>
+                        <td>
+                            @if (item.Status == true)
+                            {
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-circle" style="color: green;"></i>
+                                    <span class="ml-1">Active</span>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="d-flex align-items-center">
+                                    <i class="fa-solid fa-circle" style="color: red;"></i>
+                                    <span class="ml-1">Inactive</span>
+                                </div>
+                            }
+                        </td>
+                    </tr>
+
+                    STT++;
+                }
+            }
+
+        }
+
+    </tbody>
+</table>
